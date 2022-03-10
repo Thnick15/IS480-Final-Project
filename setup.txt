@@ -1,0 +1,1370 @@
+SQL> 
+SQL> /* ---------------
+>    A. Name and Email Address
+SQL> 	--------------- */
+SQL> 
+SQL> -- IS 480 Semester Project - Due Final
+SQL> -- Nicholas Pickens
+SQL> -- 016248425
+SQL> -- Email: Nicholas.Pickens@student.csulb.edu
+SQL> 
+SQL> -----
+SQL> -----
+SQL> 
+SQL> /* ---------------
+>     Create table structure for IS 480 class
+SQL> 	--------------- */
+SQL> 
+SQL> drop table waitlist;
+
+Table dropped.
+
+SQL> drop table enrollments;
+
+Table dropped.
+
+SQL> drop table prereq;
+
+Table dropped.
+
+SQL> drop table schclasses;
+
+Table dropped.
+
+SQL> drop table courses;
+
+Table dropped.
+
+SQL> drop table students;
+
+Table dropped.
+
+SQL> drop table majors;
+
+Table dropped.
+
+SQL> 
+SQL> -----
+SQL> -----
+SQL> 
+SQL> create table MAJORS
+  2  	     (major varchar2(3) Primary key,
+  3  	     mdesc varchar2(30));
+
+Table created.
+
+SQL> insert into majors values ('ACC','Accounting');
+
+1 row created.
+
+SQL> insert into majors values ('FIN','Finance');
+
+1 row created.
+
+SQL> insert into majors values ('IS','Information Systems');
+
+1 row created.
+
+SQL> insert into majors values ('MKT','Marketing');
+
+1 row created.
+
+SQL> 
+SQL> create table STUDENTS
+  2  	     (snum varchar2(3) primary key,
+  3  	     sname varchar2(10),
+  4  	     standing number(1),
+  5  	     major varchar2(3) constraint fk_students_major references majors(major),
+  6  	     gpa number(2,1),
+  7  	     major_gpa number(2,1));
+
+Table created.
+
+SQL> 
+SQL> insert into students values ('101','Andy',3,'IS',2.1,3.2);
+
+1 row created.
+
+SQL> insert into students values ('102','Betty',2,null,3.2,null);
+
+1 row created.
+
+SQL> insert into students values ('103','Cindy',3,'IS',2.5,3.5);
+
+1 row created.
+
+SQL> insert into students values ('104','David',1,'FIN',3.3,3.0);
+
+1 row created.
+
+SQL> insert into students values ('105','Ellen',2,null,2.8,null);
+
+1 row created.
+
+SQL> insert into students values ('106','Frank',3,'MKT',3.1,2.9);
+
+1 row created.
+
+SQL> insert into students values ('107','Nick',5,'IS',1.9,2.9);
+
+1 row created.
+
+SQL> insert into students values ('108','Bob',3,'IS',1.8,2.5);
+
+1 row created.
+
+SQL> insert into students values ('109','James',3,'IS',3.0,3.9);
+
+1 row created.
+
+SQL> insert into students values ('110','Emily',3,null,3.8,3.6);
+
+1 row created.
+
+SQL> insert into students values ('111','Corle',3,'IS',3.3,3.9);
+
+1 row created.
+
+SQL> insert into students values ('112','Taylor',4,'FIN',4.0,4.0);
+
+1 row created.
+
+SQL> insert into students values ('113','Gilbert',4,null,2.7,null);
+
+1 row created.
+
+SQL> insert into students values ('114','Kal',4,'MKT',3.1,2.9);
+
+1 row created.
+
+SQL> insert into students values ('115','Gisselle',4,'IS',2.8,2.9);
+
+1 row created.
+
+SQL> insert into students values ('116','Jason',3,'IS',3.0,3.0);
+
+1 row created.
+
+SQL> insert into students values ('117','Tao',3,null,2.8,null);
+
+1 row created.
+
+SQL> insert into students values ('118','Anna',4,'MKT',3.5,3.8);
+
+1 row created.
+
+SQL> insert into students values ('119','Nicholas',4,'IS',2.8,3.1);
+
+1 row created.
+
+SQL> insert into students values ('120','Coleton',4,'IS',3.1,3.0);
+
+1 row created.
+
+SQL> insert into students values ('121','Ashley',4,'IS',3.2,3.0);
+
+1 row created.
+
+SQL> insert into students values ('122','Alan',4,null,3.8,null);
+
+1 row created.
+
+SQL> insert into students values ('123','Kishen',4,'MKT',3.5,3.8);
+
+1 row created.
+
+SQL> insert into students values ('124','Anne',4,'IS',3.5,3.1);
+
+1 row created.
+
+SQL> insert into students values ('125','Jackson',4,'IS',3.1,3.0);
+
+1 row created.
+
+SQL> 
+SQL> create table COURSES
+  2  	     (dept varchar2(3) constraint fk_courses_dept references majors(major),
+  3  	     cnum varchar2(3),
+  4  	     ctitle varchar2(30),
+  5  	     crhr number(3),
+  6  	     standing number(1),
+  7  	     primary key (dept,cnum));
+
+Table created.
+
+SQL> 
+SQL> insert into courses values ('IS','300','Intro to MIS',3,2);
+
+1 row created.
+
+SQL> insert into courses values ('IS','301','Business Communicatons',3,2);
+
+1 row created.
+
+SQL> insert into courses values ('IS','310','Statistics',3,2);
+
+1 row created.
+
+SQL> insert into courses values ('IS','320','Spreadsheet',3,3);
+
+1 row created.
+
+SQL> insert into courses values ('IS','340','Programming',3,3);
+
+1 row created.
+
+SQL> insert into courses values ('IS','345','Internet Applications',3,3);
+
+1 row created.
+
+SQL> insert into courses values ('IS','355','Telecommunications',3,3);
+
+1 row created.
+
+SQL> insert into courses values ('IS','456','Systems Security',3,3);
+
+1 row created.
+
+SQL> insert into courses values ('IS','380','Database',3,3);
+
+1 row created.
+
+SQL> insert into courses values ('IS','385','Systems Design',3,3);
+
+1 row created.
+
+SQL> insert into courses values ('IS','457','Wireless Systems',3,4);
+
+1 row created.
+
+SQL> insert into courses values ('IS','470','Bus Intelligence',3,4);
+
+1 row created.
+
+SQL> insert into courses values ('IS','480','Adv Database',3,4);
+
+1 row created.
+
+SQL> insert into courses values ('IS','482','Enterprise',3,4);
+
+1 row created.
+
+SQL> insert into courses values ('IS','485','Systems Project',3,4);
+
+1 row created.
+
+SQL> 
+SQL> create table SCHCLASSES (
+  2  	     callnum number(5) primary key,
+  3  	     year number(4),
+  4  	     semester varchar2(3),
+  5  	     dept varchar2(3),
+  6  	     cnum varchar2(3),
+  7  	     section number(2),
+  8  	     capacity number(3));
+
+Table created.
+
+SQL> 
+SQL> alter table schclasses
+  2  	     add constraint fk_schclasses_dept_cnum foreign key
+  3  	     (dept, cnum) references courses (dept,cnum);
+
+Table altered.
+
+SQL> 
+SQL> insert into schclasses values (10110,2018,'Fa','IS','300',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10115,2018,'Fa','IS','300',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10120,2018,'Fa','IS','300',3,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10125,2018,'Fa','IS','301',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10130,2018,'Fa','IS','301',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10135,2018,'Fa','IS','310',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10140,2018,'Fa','IS','310',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10145,2018,'Fa','IS','340',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10150,2018,'Fa','IS','380',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10155,2018,'Fa','IS','385',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10160,2018,'Fa','IS','480',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10170,2018,'Fa','IS','320',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10180,2018,'Fa','IS','320',2,2);
+
+1 row created.
+
+SQL> insert into schclasses values (10190,2018,'Fa','IS','320',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10200,2018,'Fa','IS','456',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10225,2018,'Fa','IS','456',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10250,2018,'Fa','IS','456',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10275,2018,'Fa','IS','470',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10300,2018,'Fa','IS','470',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10325,2018,'Fa','IS','482',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10340,2018,'Fa','IS','482',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10360,2018,'Fa','IS','485',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10365,2018,'Fa','IS','485',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10375,2018,'Fa','IS','485',1,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10385,2018,'Fa','IS','355',2,3);
+
+1 row created.
+
+SQL> insert into schclasses values (10395,2018,'Fa','IS','355',3,4);
+
+1 row created.
+
+SQL> insert into schclasses values (10400,2018,'Fa','IS','355',2,4);
+
+1 row created.
+
+SQL> insert into schclasses values (10425,2018,'Fa','IS','355',3,4);
+
+1 row created.
+
+SQL> insert into schclasses values (10475,2018,'Fa','IS','355',1,4);
+
+1 row created.
+
+SQL> insert into schclasses values (10550,2018,'Fa','IS','480',1,3);
+
+1 row created.
+
+SQL> 
+SQL> create table PREREQ
+  2  	     (dept varchar2(3),
+  3  	     cnum varchar2(3),
+  4  	     pdept varchar2(3),
+  5  	     pcnum varchar2(3),
+  6  	     primary key (dept, cnum, pdept, pcnum));
+
+Table created.
+
+SQL> alter table Prereq
+  2  	     add constraint fk_prereq_dept_cnum foreign key
+  3  	     (dept, cnum) references courses (dept,cnum);
+
+Table altered.
+
+SQL> alter table Prereq
+  2  	     add constraint fk_prereq_pdept_pcnum foreign key
+  3  	     (pdept, pcnum) references courses (dept,cnum);
+
+Table altered.
+
+SQL> 
+SQL> insert into prereq values ('IS','380','IS','300');
+
+1 row created.
+
+SQL> insert into prereq values ('IS','380','IS','301');
+
+1 row created.
+
+SQL> insert into prereq values ('IS','380','IS','310');
+
+1 row created.
+
+SQL> insert into prereq values ('IS','385','IS','310');
+
+1 row created.
+
+SQL> insert into prereq values ('IS','340','IS','300');
+
+1 row created.
+
+SQL> insert into prereq values ('IS','480','IS','380');
+
+1 row created.
+
+SQL> 
+SQL> create table ENROLLMENTS (
+  2  	     snum varchar2(3) constraint fk_enrollments_snum references students(snum),
+  3  	     callnum number(5) constraint fk_enrollments_callnum references schclasses(callnum),
+  4  	     grade varchar2(2),
+  5  	     primary key (snum, callnum));
+
+Table created.
+
+SQL> 
+SQL> /* insert into enrollments values (101,10110,'A'); */
+SQL> /* insert into enrollments values (101,10150,'B');
+SQL> insert into enrollments values (101,10125,'C');
+SQL> insert into enrollments values (102,10110,'A');
+SQL> insert into enrollments values (102,10125,'B');
+SQL> insert into enrollments values (102,10130,'B');
+SQL> insert into enrollments values (103,10120,null);
+SQL> insert into enrollments values (103,10110,null);
+SQL> insert into enrollments values (103,10125,null);
+SQL> insert into enrollments values (103,10150,null);
+SQL> insert into enrollments values (103,10155,null);
+SQL> insert into enrollments values (104,10150,'A');
+SQL> insert into enrollments values (104,10125,'A');
+SQL> insert into enrollments values (104,10155,'A');
+SQL> insert into enrollments values (105,10150,'C');
+SQL> insert into enrollments values (105,10125,'C');
+SQL> insert into enrollments values (105,10155,'C');
+SQL> insert into enrollments values (103,10550,null); */
+SQL> 
+SQL> /* insert into enrollments values (106,10150,'B');
+SQL> 	insert into enrollments values (106,10155,'B'); */
+SQL> 
+SQL> 
+SQL> create table WAITLIST (
+  2  	     -- ranking number(3),
+  3  	     snum varchar2(3) constraint fk_waitlist_snum references students(snum),
+  4  	     callnum number(5) constraint fk_waitlist_callnum references schclasses(callnum),
+  5  	     requestedtime date,
+  6  	     constraint fk_waitlist_pk primary key(snum, callnum));
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> /* insert into waitlist values (1, 107, 10110, 'George', '2010-01-01 10:20:44');
+SQL> insert into waitlist values (2, 103, 10110, 'Cindy', '2010-01-01 11:40:44');
+SQL> insert into waitlist values (3, 104, 10110, 'David', '2010-01-01 14:20:44');
+SQL> insert into waitlist values (4, 106, 10110, 'Frank', '2010-01-01 16:20:44');
+SQL> 
+SQL> insert into waitlist values (1, 106, 10550, 'Frank', '2010-01-01 10:20:44');
+SQL> insert into waitlist values (2, 102, 10550, 'Betty', '2010-01-01 17:20:44');
+SQL> insert into waitlist values (1, 101, 10115, 'Andy', '2010-01-01 10:20:44');
+SQL> insert into waitlist values (2, 103, 10115, 'Cindy', '2010-01-01 11:40:44');
+SQL> insert into waitlist values (3, 104, 10115, 'David', '2010-01-01 14:20:44');
+SQL> insert into waitlist values (4, 106, 10115, 'Frank', '2010-01-01 16:20:44'); */
+SQL> 
+SQL> commit;
+
+Commit complete.
+
+SQL> 
+SQL> -----
+SQL> -----
+SQL> 
+SQL> /* ---------------
+>    Print all table structure and test data for IS 480 class
+SQL> 	--------------- */
+SQL> 
+SQL> /* ---------------
+>    B. Print all table structure
+SQL> 	--------------- */
+SQL> 
+SQL> describe majors;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MAJOR                                     NOT NULL VARCHAR2(3)
+ MDESC                                              VARCHAR2(30)
+
+SQL> describe students;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNUM                                      NOT NULL VARCHAR2(3)
+ SNAME                                              VARCHAR2(10)
+ STANDING                                           NUMBER(1)
+ MAJOR                                              VARCHAR2(3)
+ GPA                                                NUMBER(2,1)
+ MAJOR_GPA                                          NUMBER(2,1)
+
+SQL> describe courses;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT                                      NOT NULL VARCHAR2(3)
+ CNUM                                      NOT NULL VARCHAR2(3)
+ CTITLE                                             VARCHAR2(30)
+ CRHR                                               NUMBER(3)
+ STANDING                                           NUMBER(1)
+
+SQL> describe schclasses;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CALLNUM                                   NOT NULL NUMBER(5)
+ YEAR                                               NUMBER(4)
+ SEMESTER                                           VARCHAR2(3)
+ DEPT                                               VARCHAR2(3)
+ CNUM                                               VARCHAR2(3)
+ SECTION                                            NUMBER(2)
+ CAPACITY                                           NUMBER(3)
+
+SQL> describe prereq;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT                                      NOT NULL VARCHAR2(3)
+ CNUM                                      NOT NULL VARCHAR2(3)
+ PDEPT                                     NOT NULL VARCHAR2(3)
+ PCNUM                                     NOT NULL VARCHAR2(3)
+
+SQL> describe enrollments;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNUM                                      NOT NULL VARCHAR2(3)
+ CALLNUM                                   NOT NULL NUMBER(5)
+ GRADE                                              VARCHAR2(2)
+
+SQL> describe waitlist;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNUM                                      NOT NULL VARCHAR2(3)
+ CALLNUM                                   NOT NULL NUMBER(5)
+ REQUESTEDTIME                                      DATE
+
+SQL> 
+SQL> /* ---------------
+>    C. Print all test data
+SQL> 	--------------- */
+SQL> 
+SQL> select * from majors;
+
+MAJ MDESC                                                                       
+--- ------------------------------                                              
+ACC Accounting                                                                  
+FIN Finance                                                                     
+IS  Information Systems                                                         
+MKT Marketing                                                                   
+
+SQL> select * from students;
+
+SNU SNAME        STANDING MAJ        GPA  MAJOR_GPA                             
+--- ---------- ---------- --- ---------- ----------                             
+101 Andy                3 IS         2.1        3.2                             
+102 Betty               2            3.2                                        
+103 Cindy               3 IS         2.5        3.5                             
+104 David               1 FIN        3.3          3                             
+105 Ellen               2            2.8                                        
+106 Frank               3 MKT        3.1        2.9                             
+107 Nick                5 IS         1.9        2.9                             
+108 Bob                 3 IS         1.8        2.5                             
+109 James               3 IS           3        3.9                             
+110 Emily               3            3.8        3.6                             
+111 Corle               3 IS         3.3        3.9                             
+
+SNU SNAME        STANDING MAJ        GPA  MAJOR_GPA                             
+--- ---------- ---------- --- ---------- ----------                             
+112 Taylor              4 FIN          4          4                             
+113 Gilbert             4            2.7                                        
+114 Kal                 4 MKT        3.1        2.9                             
+115 Gisselle            4 IS         2.8        2.9                             
+116 Jason               3 IS           3          3                             
+117 Tao                 3            2.8                                        
+118 Anna                4 MKT        3.5        3.8                             
+119 Nicholas            4 IS         2.8        3.1                             
+120 Coleton             4 IS         3.1          3                             
+121 Ashley              4 IS         3.2          3                             
+122 Alan                4            3.8                                        
+
+SNU SNAME        STANDING MAJ        GPA  MAJOR_GPA                             
+--- ---------- ---------- --- ---------- ----------                             
+123 Kishen              4 MKT        3.5        3.8                             
+124 Anne                4 IS         3.5        3.1                             
+125 Jackson             4 IS         3.1          3                             
+
+25 rows selected.
+
+SQL> select * from courses;
+
+DEP CNU CTITLE                               CRHR   STANDING                    
+--- --- ------------------------------ ---------- ----------                    
+IS  300 Intro to MIS                            3          2                    
+IS  301 Business Communicatons                  3          2                    
+IS  310 Statistics                              3          2                    
+IS  320 Spreadsheet                             3          3                    
+IS  340 Programming                             3          3                    
+IS  345 Internet Applications                   3          3                    
+IS  355 Telecommunications                      3          3                    
+IS  456 Systems Security                        3          3                    
+IS  380 Database                                3          3                    
+IS  385 Systems Design                          3          3                    
+IS  457 Wireless Systems                        3          4                    
+
+DEP CNU CTITLE                               CRHR   STANDING                    
+--- --- ------------------------------ ---------- ----------                    
+IS  470 Bus Intelligence                        3          4                    
+IS  480 Adv Database                            3          4                    
+IS  482 Enterprise                              3          4                    
+IS  485 Systems Project                         3          4                    
+
+15 rows selected.
+
+SQL> select * from schclasses;
+
+   CALLNUM       YEAR SEM DEP CNU    SECTION   CAPACITY                         
+---------- ---------- --- --- --- ---------- ----------                         
+     10110       2018 Fa  IS  300          1          3                         
+     10115       2018 Fa  IS  300          2          3                         
+     10120       2018 Fa  IS  300          3          3                         
+     10125       2018 Fa  IS  301          1          3                         
+     10130       2018 Fa  IS  301          2          3                         
+     10135       2018 Fa  IS  310          1          3                         
+     10140       2018 Fa  IS  310          2          3                         
+     10145       2018 Fa  IS  340          1          3                         
+     10150       2018 Fa  IS  380          1          3                         
+     10155       2018 Fa  IS  385          1          3                         
+     10160       2018 Fa  IS  480          1          3                         
+
+   CALLNUM       YEAR SEM DEP CNU    SECTION   CAPACITY                         
+---------- ---------- --- --- --- ---------- ----------                         
+     10170       2018 Fa  IS  320          1          3                         
+     10180       2018 Fa  IS  320          2          2                         
+     10190       2018 Fa  IS  320          2          3                         
+     10200       2018 Fa  IS  456          2          3                         
+     10225       2018 Fa  IS  456          1          3                         
+     10250       2018 Fa  IS  456          2          3                         
+     10275       2018 Fa  IS  470          2          3                         
+     10300       2018 Fa  IS  470          1          3                         
+     10325       2018 Fa  IS  482          2          3                         
+     10340       2018 Fa  IS  482          1          3                         
+     10360       2018 Fa  IS  485          1          3                         
+
+   CALLNUM       YEAR SEM DEP CNU    SECTION   CAPACITY                         
+---------- ---------- --- --- --- ---------- ----------                         
+     10365       2018 Fa  IS  485          1          3                         
+     10375       2018 Fa  IS  485          1          3                         
+     10385       2018 Fa  IS  355          2          3                         
+     10395       2018 Fa  IS  355          3          4                         
+     10400       2018 Fa  IS  355          2          4                         
+     10425       2018 Fa  IS  355          3          4                         
+     10475       2018 Fa  IS  355          1          4                         
+     10550       2018 Fa  IS  480          1          3                         
+
+30 rows selected.
+
+SQL> select * from prereq;
+
+DEP CNU PDE PCN                                                                 
+--- --- --- ---                                                                 
+IS  380 IS  300                                                                 
+IS  380 IS  301                                                                 
+IS  380 IS  310                                                                 
+IS  385 IS  310                                                                 
+IS  340 IS  300                                                                 
+IS  480 IS  380                                                                 
+
+6 rows selected.
+
+SQL> -- enrollments and waitlist will display no records because test data has been commented out for testing addme and dropme procedures.
+SQL> select * from enrollments;
+
+no rows selected
+
+SQL> select * from waitlist;
+
+no rows selected
+
+SQL> 
+SQL> -----
+SQL> -----
+SQL> 
+SQL> 
+SQL> /* ------------------------------------
+>    Beginning of IS 380 Semester Project
+SQL> 	------------------------------------ */
+SQL> 
+SQL> 	/* ---------------
+>    D.  All Programs
+SQL> 	--------------- */
+SQL> 
+SQL> create or replace package ENROLL is
+  2  
+  3  -- *** PART 1. ENROLL A STUDENT TO A CLASS ***
+  4  
+  5  -- 1. Check student number.
+  6   procedure CheckS#
+  7  	     (p_snum IN students.snum%type,
+  8  		     p_ErrorText OUT varchar2);
+  9  
+ 10  -- Check student call number.
+ 11  procedure CheckCall#
+ 12  	     (p_callnum IN schclasses.callnum%type,
+ 13  		     p_ErrorText OUT varchar2);
+ 14  
+ 15  -- 2. Check repeat enrollment.
+ 16   procedure Check_repeat_enrollment
+ 17  	 (p_snum IN students.snum%type,
+ 18  	 p_callnum IN enrollments.callnum%type,
+ 19  	 p_ErrorText OUT varchar2);
+ 20  
+ 21  -- 3. Check double enrollment.
+ 22  function Check_double_enrollment
+ 23  	 (p_snum students.snum%type,
+ 24  	 p_callnum schclasses.callnum%type)
+ 25  	 return varchar2;
+ 26  
+ 27  -- 4. Check credit.
+ 28  procedure CheckCr
+ 29  	     (p_snum IN students.snum%type,
+ 30  	     p_callnum IN schclasses.callnum%type,
+ 31  	     p_ErrorText OUT varchar2);
+ 32  
+ 33  -- 5. Check standing requirement.
+ 34  procedure Check_standing
+ 35  	 (p_snum IN students.snum%type,
+ 36  	 p_callnum IN schclasses.callnum%type,
+ 37  	 p_ErrorText OUT varchar2);
+ 38  
+ 39  -- 6. Check if student disqualified.
+ 40  function Check_qualification
+ 41  	 (p_snum students.snum%type,
+ 42  	 p_callnum schclasses.callnum%type)
+ 43  	 return varchar2;
+ 44  
+ 45  -- 7. Check capacity.
+ 46  procedure CheckCap
+ 47  	     (p_callnum IN schclasses.callnum%type,
+ 48  		     p_ErrorText OUT varchar2);
+ 49  
+ 50  -- 9. Check repeat waitlist.
+ 51  procedure Check_repeat_waitlist
+ 52  	 (p_snum IN students.snum%type,
+ 53  	 p_callnum IN enrollments.callnum%type,
+ 54  	 p_ErrorText OUT varchar2);
+ 55  
+ 56  -- Main procedure AddMe.
+ 57  procedure AddMe
+ 58  	     (p_snum IN students.snum%type,
+ 59  	     p_callnum IN enrollments.callnum%type,
+ 60  		     p_ErrorMsg OUT varchar2);
+ 61  
+ 62  
+ 63  -- *** PART 2. DROP A STUDENT FROM A CLASS ***
+ 64  
+ 65  -- 2. Check if enrolled in the class.
+ 66  procedure Check_not_enrolled
+ 67  	 (p_snum IN enrollments.snum%type,
+ 68  	 p_callnum IN enrollments.callnum%type,
+ 69  	 p_ErrorText OUT varchar2);
+ 70  
+ 71  -- 3. Check if graded already.
+ 72  procedure Check_if_graded
+ 73  	 (p_snum IN enrollments.snum%type,
+ 74  	 p_callnum IN enrollments.callnum%type,
+ 75  	 p_ErrorText OUT varchar2);
+ 76  
+ 77  
+ 78  -- Main procedure DropMe
+ 79   procedure DropMe
+ 80  	 (p_snum IN students.snum%type,
+ 81  	 p_callnum IN schclasses.callnum%type);
+ 82  
+ 83  End ENROLL;
+ 84  /
+
+Package created.
+
+SQL> 
+SQL> create or replace package Body ENROLL is
+  2  
+  3  -- *** PART 1. ADD A STUDENT TO A CLASS ***
+  4  
+  5  -- 1. Valid student number and valid call number: If thet student number or call number is invalid,
+  6  -- the system would print an error message and does not proceed with the following checks.
+  7  
+  8  -- The student must be a valid student.
+  9  procedure CheckS#
+ 10  		     (p_snum IN students.snum%type,
+ 11  		     p_ErrorText OUT varchar2) as
+ 12  
+ 13  		     v_count number(3);
+ 14  
+ 15  begin
+ 16  
+ 17  	     select count(*) into v_count
+ 18  	     from students
+ 19  	     where snum = p_snum;
+ 20  
+ 21  	     -- if no student with input snum, raise error.
+ 22  	     if v_count = 0 then
+ 23  		     p_ErrorText := 'Student number ' || p_snum || ' not found. ';
+ 24  	     end if;
+ 25  
+ 26  end;
+ 27  
+ 28  -- The Call number must be a valid call number.
+ 29  
+ 30  procedure CheckCall#
+ 31  	     (p_callnum IN schclasses.callnum%type,
+ 32  	     p_ErrorText OUT varchar2) as
+ 33  
+ 34  	     v_count number(3);
+ 35  
+ 36  begin
+ 37  
+ 38  	     select count(*) into v_count
+ 39  	     from schclasses
+ 40  	     where callnum = p_callnum;
+ 41  
+ 42  	 -- if no course with input callnum, raise error.
+ 43  	     if v_count = 0 then
+ 44  		     p_ErrorText := 'Call number ' || p_callnum || ' not found. ';
+ 45  	     end if;
+ 46  
+ 47  end;
+ 48  
+ 49  -- 2. Repeat Enrollment: A student cannot enroll in the same Callnum again. The system
+ 50  -- prints an error message if there is repeat enrollment.
+ 51    procedure Check_repeat_enrollment
+ 52  	 (p_snum IN students.snum%type,
+ 53  	 p_callnum IN enrollments.callnum%type,
+ 54  	 p_ErrorText OUT varchar2) as
+ 55  
+ 56  	 v_currently_enrolled number(3);
+ 57  	 v_grade varchar2(2);
+ 58  
+ 59  begin
+ 60  	 -- check if the student is currently enrolled in course.
+ 61  	 select count(*) into v_currently_enrolled
+ 62  	 from enrollments
+ 63  	 where snum = p_snum
+ 64  	 and callnum = p_callnum;
+ 65  
+ 66  	 -- need separate begin/end for checking grade of student (or it will not check it).
+ 67  	 begin
+ 68  	 select grade into v_grade
+ 69  	 from enrollments
+ 70  	 where snum = p_snum
+ 71  	 and callnum = p_callnum;
+ 72  
+ 73  	 -- exception if no grade found.
+ 74  	 -- if no grade is found it will raise errors.
+ 75  	 exception
+ 76  	 when NO_DATA_FOUND then
+ 77  	     null;
+ 78  
+ 79  	 end;
+ 80  
+ 81  	 -- if student found enrolled in entered course number, raise error.
+ 82  	 if v_currently_enrolled != 0 then
+ 83  	     -- if withdrawn from class, give error.
+ 84  	     if v_grade = 'W' then
+ 85  		 p_ErrorText := 'You cannot enroll in this course again. You''ve recently dropped this course and received a grade of W. ';
+ 86  	     else
+ 87  		 -- if already enrolled in course then give error.
+ 88  		 p_ErrorText := 'Sorry. You are already enrolled in the course ' || p_callnum || '. ';
+ 89  	     end if;
+ 90  	 end if;
+ 91  
+ 92  
+ 93  end;
+ 94  
+ 95  -- 3. Double Enrollment: A student cannot enroll in other section of the same course.
+ 96  -- That is, if a student is already enrolled in IS 380 Section 1, he cannot be enrolled in
+ 97  -- IS 380 Section 2. The system prints an error message if there is a repeat enrollment.
+ 98  
+ 99   function Check_double_enrollment
+100  	 (p_snum students.snum%type,
+101  	 p_callnum schclasses.callnum%type)
+102  	 return varchar2 is
+103  
+104  	 rSchclasses schclasses%rowtype;
+105  	 v_count number(3);
+106  	 p_ErrorText varchar2(200);
+107  
+108  begin
+109  
+110  	 -- %rowtype page 56 in notes.
+111  	 -- select the entire schedule row for callnum.
+112  	 -- do not need exception for this as it always returns one row (if course found)
+113  	 select * into rSchclasses
+114  	 from schclasses
+115  	 where callnum = p_callnum;
+116  
+117  	 -- check if student is trying to enroll in other section of same course
+118  	 -- by checking if schclasses matches the entire schedule row.
+119  
+120  	 -- checks all but section. if all is equal except section, the student is trying to enroll in another section of the same course.
+121  	 select count(*) into v_count
+122  	 from schclasses sc, enrollments e
+123  	 where e.snum = p_snum
+124  	 and sc.callnum = e.callnum
+125  	 and sc.year = rSchclasses.year
+126  	 and sc.semester = rSchclasses.semester
+127  	 and sc.dept = rSchclasses.dept
+128  	 and sc.cnum = rSchclasses.cnum;
+129  
+130  	 -- and e.grade is null;
+131  
+132  	 -- check if there's a match for another section
+133  	 -- if match then give error, else error is null.
+134  	 if v_count != 0 then
+135  	     p_ErrorText := 'Sorry. You cannot enroll in another section of the same course in which you are already enrolled in. ';
+136  	 else
+137  	     p_ErrorText := null;
+138  	 end if;
+139  	 return p_ErrorText;
+140  
+141  end;
+142  
+143  -- 4. 15-Hour Rule: A student can enroll in at most 15 credit hours per semester.
+144  -- The system prints an error message if the 15-hour rule is violated.
+145  
+146  procedure CheckCr
+147  	     (p_snum IN students.snum%type,
+148  	     p_callnum IN schclasses.callnum%type,
+149  	     p_ErrorText OUT varchar2) as
+150  
+151  	     v_Existing_CrHr number;
+152  	     v_ToAdd_CrHr number;
+153  
+154  begin
+155  	     -- find existing CrHr.
+156  	     select nvl(sum(CrHr), 0) into v_Existing_CrHr
+157  	     from enrollments e, schclasses sc, courses c
+158  	     where e.snum = p_snum
+159  	     and e.callnum = sc.callnum
+160  	     and sc.dept = c.dept
+161  	     and sc.cnum = c.cnum
+162  	     and grade is null;
+163  
+164  	     -- find CrHr to add.
+165  	     select CrHr into v_ToAdd_CrHr
+166  	     from schclasses sc, courses c
+167  	     where sc.dept = c.dept
+168  	     and sc.cnum = c.cnum
+169  	     and sc.callnum = p_callnum;
+170  
+171  	 -- if existing credits + new credits to add are greater than 15 limit, raise error.
+172  	     if v_Existing_CrHr + v_ToAdd_CrHr > 15 then
+173  		     p_ErrorText := 'Sorry. Limit of 15 credit hours exceeded. ';
+174  	     end if;
+175  
+176  end;
+177  
+178  -- 5. Standing requirement: A student's standing must be equal or higher than the standing requirement
+179  -- required by the course.
+180  procedure Check_standing
+181  	 (p_snum IN students.snum%type,
+182  	 p_callnum IN schclasses.callnum%type,
+183  	 p_ErrorText OUT varchar2) as
+184  
+185  	 v_stu_standing number(1);
+186  	 v_c_standing number(1);
+187  	 v_dept varchar2(3);
+188  	 v_cnum varchar2(3);
+189  
+190  begin
+191  	 -- find the standing of student.
+192  	 select standing into v_stu_standing
+193  	 from students
+194  	 where snum = p_snum;
+195  
+196  	 -- find the standing requirement of the course.
+197  	 select standing, c.dept, c.cnum into v_c_standing, v_dept, v_cnum
+198  	 from courses c, schclasses sc
+199  	 where sc.callnum = p_callnum
+200  	 and sc.dept = c.dept
+201  	 and sc.cnum = c.cnum;
+202  
+203  	 -- if students standing is less than the standing required for course, raise error.
+204  	 if v_stu_standing < v_c_standing then
+205  	     p_ErrorText := 'Sorry. Your standing of ' || v_stu_standing || ' does not meet the requirements of the course ' || v_dept || ' ' || v_cnum || '. ';
+206  	 end if;
+207  end;
+208  
+209  -- 6. Disqualified Student: When a non-freshman (standing other than 1) student's GPA is lower
+210  -- than 2.0, the student is now in Disqualified status. A disqualified student cannot enroll
+211  -- in any course.
+212  function Check_qualification
+213  	 (p_snum students.snum%type,
+214  	 p_callnum schclasses.callnum%type)
+215  	 return varchar2 is
+216  
+217  	 v_stu_standing number(1);
+218  	 v_stu_gpa number(2,1);
+219  	 p_ErrorText varchar2(200);
+220  
+221  begin
+222  	 -- find the standing of student.
+223  	 -- find the gpa of student.
+224  	 select standing, gpa into v_stu_standing, v_stu_gpa
+225  	 from students
+226  	 where snum = p_snum;
+227  
+228  	 -- if standing is greater than freshman and gpa is less than 2.0 give error.
+229  	 if v_stu_standing > 1 and v_stu_gpa < 2.0 then
+230  	     p_ErrorText := 'Sorry. You are disqualified from enrolling in any course at this time because your current GPA of ' || v_stu_gpa || ' is lower than the minimum requirement of 2.0. ';
+231  	 else
+232  	     p_ErrorText := null;
+233  	 end if;
+234  	 return p_ErrorText;
+235  end;
+236  
+237  -- 7. Capacity: Each class has a capacity limit. This student can enroll only when after
+238  -- his/her enrollment, the class size is kept within the capacity limit.
+239  
+240   procedure CheckCap
+241  	     (p_callnum IN schclasses.callnum%type,
+242  	     p_ErrorText OUT varchar2) as
+243  
+244  	     v_max_capacity number(3);
+245  	     v_currently_enrolled number(3);
+246  
+247  begin
+248  
+249  -- check class capacity limit
+250  	     select capacity into v_max_capacity
+251  	     from schclasses
+252  	     where callnum = p_callnum;
+253  
+254  -- check number of students currently enrolled
+255  	     select count(*) into v_currently_enrolled
+256  	     from enrollments
+257  	     where callnum = p_callnum
+258  	     and grade is null;
+259  
+260  	 -- if the max capacity of the class is <= the amount currenty enrolled, raise error.
+261  	     if v_max_capacity <= v_currently_enrolled then
+262  		     p_ErrorText := 'Unable to add course number ' || p_callnum || '. Capacity limit reached. ';
+263  	     end if;
+264  
+265  end;
+266  
+267  -- 9. Repeat waitlist: If the student is already on the waiting list for this CallNum, you should not
+268  -- place the student on the waiting list again. Print a message to let the student know.
+269  
+270  procedure Check_repeat_waitlist
+271  	 (p_snum IN students.snum%type,
+272  	 p_callnum IN enrollments.callnum%type,
+273  	 p_ErrorText OUT varchar2) as
+274  
+275  	 v_count number(3);
+276  
+277  begin
+278  	 select count(*) into v_count
+279  	 from waitlist
+280  	 where snum = p_snum
+281  	 and callnum = p_callnum;
+282  
+283  	 -- if student is already on waitlist, raise error.
+284  	 if v_count != 0 then
+285  	     p_ErrorText := ('Student number ' || p_snum || ' is already on the waitlist for class number ' || p_callnum || '. ');
+286  	 end if;
+287  end;
+288  
+289  -- Main AddMe procedure.
+290  
+291  procedure AddMe
+292  	     (p_snum IN students.snum%type,
+293  	     p_callnum IN enrollments.callnum%type,
+294  	     p_ErrorMsg OUT varchar2) as
+295  
+296  	     -- v_ErrorMsg varchar2(200);
+297  	     v_ErrorText varchar2(200);
+298  
+299  begin
+300  
+301  	 -- Check if student number is valid.
+302  	     CheckS#(p_snum, v_ErrorText);
+303  	     p_ErrorMsg := v_ErrorText;
+304  
+305  	 -- Check if call number is valid.
+306  	     CheckCall#(p_callnum, v_ErrorText);
+307  	     p_ErrorMsg := p_ErrorMsg || v_ErrorText;
+308  
+309  	 -- if there's no errors, proceed with following check.
+310  	 if p_ErrorMsg is null then
+311  	     -- check if student is disqualified
+312  	     p_ErrorMsg := Check_qualification(p_snum, p_callnum);
+313  	 end if;
+314  
+315  	 -- if not disqualified, proceed with following checks.
+316  	 -- rest of the checks should not go through if student is disqualified.
+317  	 if p_ErrorMsg is null then
+318  	     -- Check for repeat enrollment.
+319  	     Check_repeat_enrollment(p_snum, p_callnum, v_ErrorText);
+320  	     p_ErrorMsg := p_ErrorMsg || v_ErrorText;
+321  
+322  	     if p_ErrorMsg is null then
+323  		 -- Check for double enrollment.
+324  		 p_ErrorMsg := Check_double_enrollment(p_snum, p_callnum);
+325  	      end if;
+326  
+327  	     if p_ErrorMsg is null then
+328  		  -- check for 15-hour rule.
+329  		  CheckCr(p_snum, p_callnum, v_ErrorText);
+330  			 p_ErrorMsg := p_ErrorMsg || v_ErrorText;
+331  	     end if;
+332  
+333  	     if p_ErrorMsg is null then
+334  		 -- Check standing requirement.
+335  		 Check_standing(p_snum, p_callnum, v_ErrorText);
+336  		 p_ErrorMsg := p_ErrorMsg || v_ErrorText;
+337  	     end if;
+338  
+339  	     -- if there are no errors to add student, continue to check class capacity.
+340  	     -- if class is at capacity, check repeat waitlist and add student to waitlist if not a repeat
+341  	     -- if class is not at capacity, enroll student to the course.
+342  	     if p_ErrorMsg is null then
+343  		 -- Check class capacity limit.
+344  		 CheckCap(p_callnum, v_ErrorText);
+345  		 p_ErrorMsg := p_ErrorMsg || v_ErrorText;
+346  
+347  		 -- if error is found in capacity, then try adding student to waitlist, else continue to enroll student.
+348  		 if p_ErrorMsg is not null then
+349  
+350  		     -- error message stating the capacity of class in which student is attempting to enroll in has been reached already.
+351  		     -- dbms_output.put_line (p_ErrorMsg);
+352  		     -- this message should never print.
+353  		     -- error stored to continue to waitlist.
+354  		     -- capacity of class should already be displayed.
+355  		     -- should proceed to adding student to waitlist.
+356  
+357  		 -- 8. Waitlist: If this student has fulfilled all requirements but the class is full, then add
+358  		 -- his/her record to the waiting list. The system then prints "Student number xxxx is now on the
+359  		 -- waiting list for class number xxxx".
+360  
+361  		     -- check if repeat add.
+362  		     -- does not grab error message from capacity.
+363  		     Check_repeat_waitlist(p_snum, p_callnum, v_ErrorText);
+364  		     p_ErrorMsg := v_ErrorText;
+365  
+366  		     -- If student is not a repeat add, add to waitlist.
+367  		     if p_ErrorMsg is null then
+368  			 insert into waitlist values(p_snum, p_callnum, sysdate);
+369  			 commit;
+370  			 dbms_output.put_line('Student number ' || p_snum || ' is now on the waitlist for class number ' || p_callnum || '. ');
+371  		     else
+372  			 -- 9. if student is a repeat add, print error from check_repeat_waitlist.
+373  			 dbms_output.put_line(p_ErrorMsg);
+374  		     end if;
+375  		 else
+376  		     -- Else if no errors, add student to enrollments.
+377  		     insert into enrollments values (p_snum, p_callnum, null);
+378  			     commit;
+379  		     -- 10. Print confirmation message if student is (finally) successfully enrolled in the course.
+380  			     dbms_output.put_line ('Student number ' || p_snum || ' has been successfully enrolled in the course ' || p_callnum || '. ');
+381  		 end if;
+382  	     else
+383  		 -- if errors above, do not continue to check waitlist or attempt enrolling student and print error message.
+384  		 dbms_output.put_line (p_ErrorMsg);
+385  	     end if;
+386  	 else
+387  	     -- print error if input student number and call number are incorrect.
+388  	     -- also skip to this error if the student is disqualified from enrolling.
+389  	     dbms_output.put_line (p_ErrorMsg);
+390  	 end if;
+391  
+392  end;
+393  
+394  -- *** PART 2. DROP A STUDENT FROM A CLASS ***
+395  
+396  -- 2. Not Enrolled: If the student is not enrolled in this class, we cannot drop him. The system prints an error msg.
+397  
+398  procedure Check_not_enrolled
+399  	 (p_snum IN enrollments.snum%type,
+400  	 p_callnum IN enrollments.callnum%type,
+401  	 p_ErrorText OUT varchar2) as
+402  
+403  	 v_count number(3);
+404  
+405  	 begin
+406  	     -- get information if student is enrolled in the class or not.
+407  	     -- 0 = not enrolled.
+408  	     -- >0 = enrolled.
+409  	     select count(*) into v_count
+410  	     from enrollments
+411  	     where snum = p_snum
+412  	     and callnum = p_callnum;
+413  
+414  	     -- if student is not enrolled in the desired course to drop, raise error.
+415  	     if v_count = 0 then
+416  		     p_ErrorText := 'Error encountered. Student number ' || p_snum || ' not found to be enrolled in the course number '|| p_callnum || '. ';
+417  		 end if;
+418  	 end;
+419  
+420  -- 3. Already Graded: If a grade is already assigned in this class, the student cannot drop. The system prints an error msg.
+421  procedure Check_if_graded
+422  	 (p_snum IN enrollments.snum%type,
+423  	 p_callnum IN enrollments.callnum%type,
+424  	 p_ErrorText OUT varchar2) as
+425  
+426  	 v_grade varchar2(2);
+427  
+428  	 begin
+429  	     -- get grade for student and call number submitted.
+430  	     select grade into v_grade
+431  	     from enrollments
+432  	     where snum = p_snum
+433  	     and callnum = p_callnum;
+434  
+435  	     -- if a grade has been assigned, give error.
+436  	     if v_grade is not null then
+437  		 p_ErrorText := 'You cannot drop this course. You''ve already received a grade of ' || v_grade || ' in course number ' || p_callnum ||'. ';
+438  	     end if;
+439  	 end;
+440  
+441  -- Main DropMe procedure.
+442  
+443  -- 4. Drop the Student: To drop a student from a course, system updates the GRADE of the enrollment to 'W'. A confirmation message is printed
+444  -- 5. Once a studnet drops from a course, your program should proceed to check if there are any students on the waiting list.
+445  -- If there is, you should move the student who requested the enrollment the earliest to the enrollment list.
+446  -- 5(a). Note that a check on all enrollment requirements should be performed on this new enrollment.
+447  -- 5(b). If this new student is enrolled, he/she should be removed from the waiting ist.
+448  -- 5(c). If this student cannot enroll for any reason (for instance, he/she noe has too many units, etc),
+449  -- his/her record should remain on the waiting list and you should attempt to enroll the next student on the waiting list.
+450  -- Your program continues until either one student is enrolled or there is no (qualified) student on the waiting list.
+451  
+452  procedure DropMe
+453  	 (p_snum IN students.snum%type,
+454  	 p_callnum IN schclasses.callnum%type) as
+455  
+456  	 v_ErrorMsg varchar2(200);
+457  	     v_ErrorText varchar2(200);
+458  	 v_waitlist number(10);
+459  
+460  	 -- cursor for waitlist
+461  	 -- order by requestedtime, so student who requested the enrollment earliest is moved.
+462  	 cursor cur_waitlist is
+463  	     select *
+464  	     from waitlist
+465  	     where callnum = p_callnum
+466  	     order by requestedtime;
+467  
+468  	 begin
+469  	     -- Check if student number is valid.
+470  		 CheckS#(p_snum, v_ErrorText);
+471  		 v_ErrorMsg := v_ErrorText;
+472  
+473  	     -- Check if call number is valid.
+474  		 CheckCall#(p_callnum, v_ErrorText);
+475  		 v_ErrorMsg := v_ErrorMsg || v_ErrorText;
+476  
+477  	     -- if there's no errors, proceed with following checks.
+478  	     if v_ErrorMsg is null then
+479  		 -- Check if student is enrolled in class.
+480  		 Check_not_enrolled(p_snum, p_callnum, v_ErrorText);
+481  		 v_ErrorMsg := v_ErrorMsg || v_ErrorText;
+482  	     end if;
+483  
+484  	     if v_ErrorMsg is null then
+485  		 -- Check if student has already received a grade for class.
+486  		 Check_if_graded(p_snum, p_callnum, v_ErrorText);
+487  		 v_ErrorMsg := v_ErrorMsg || v_ErrorText;
+488  	     end if;
+489  
+490  	     -- if no errors, continue to drop student from class, else raise error.
+491  	     if v_ErrorMsg is null then
+492  		 -- 4. Drop student from class by updating enrollments
+493  		 -- System updates the GRADE of the enrollment to a 'W'.
+494  		 update enrollments
+495  		 set grade = 'W'
+496  		 where snum = p_snum
+497  		 and callnum = p_callnum;
+498  		 commit;
+499  
+500  		 -- Print confirmation message of dropping course.
+501  		 dbms_output.put_line('Student number ' || p_snum || ' has been successfully dropped from the course number ' || p_callnum || '. ');
+502  
+503  		 -- Once a student drops from a course, program will check if there are any students on waiting list
+504  		 select count(*) into v_waitlist
+505  		 from waitlist
+506  		 where callnum = p_callnum;
+507  
+508  		 -- 5. Cursor checks waitlist, if there is students on waitlist, it will move student who requested enrollment earliest to enrollments list.
+509  		 if v_waitlist != 0 then
+510  		     -- 5a. Note that a check on all enrollment requirements should be performed on new enrollment(s).
+511  		     for stu in cur_waitlist loop
+512  			 -- check all enrollment requirements of student(s) on waiting list by calling addme procedure.
+513  			 addme(stu.snum, stu.callnum, v_ErrorText);
+514  			 v_ErrorMsg := v_ErrorText;
+515  
+516  			 -- Confirmation message will be printed if a student is added when AddMe procedure
+517  			 -- is called in the DropMe procedure to ensure the enrollment does not go silent.
+518  			 -- In "real life" scenario, DropMe message will be sent to student dropping and
+519  			 -- AddMe message will be sent to student on waitlist looking to enroll course.
+520  
+521  			 -- if enrollment requirements are met, then proceed.
+522  			 if v_ErrorMsg is null then
+523  			 -- 5b. If this new student is enrolled (no errors found), he/she should be removed from the waiting list.
+524  			     delete
+525  			     from waitlist
+526  			     where snum = stu.snum
+527  			     and callnum = stu.callnum;
+528  			     commit;
+529  
+530  			     exit;
+531  			 end if;
+532  			 -- EXIT IF CONDITION AND CONTINUE LOOPING THROUGH WAITLIST.
+533  			 -- 5c. If this student cannot enroll for any reason (for instance, he/she now has too many units, etc), his/her record
+534  			 -- should remain on the waiting list and shoulad attempt to enroll the next student on the waiting list.
+535  			 -- Program continues until either one student is enrolled or there is no (qualified) student on the waiting list.
+536  		     end loop;
+537  		 end if;
+538  	     else
+539  		 -- If checks fail to drop a student, print error message.
+540  		 dbms_output.put_line (v_ErrorMsg);
+541  	     end if;
+542  	 end;
+543  
+544  End ENROLL;
+545  /
+
+Package body created.
+
+SQL> 
+SQL> start d:testing;
+SQL> set echo on
+SQL> 
+SQL> set serveroutput on
+SQL> 
+SQL> spool d:testing.txt
