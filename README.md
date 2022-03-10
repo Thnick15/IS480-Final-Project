@@ -4,7 +4,7 @@
 
 <h4 align="center">Fall 2018</h4>
 
-<h4 align="center">IS 480 Section 01 - Advanced Database Systems</h4>
+<h4 align="center">IS 480 - Advanced Database Systems</h4>
 
 <h4 align="center">Semester Project</h4>
 
