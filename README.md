@@ -10,4 +10,7 @@
 
 <h3 align="center">Enrollment System</h4>
 
-<h3 align="left">Project Description</h4>
+
+The project requires you to
+  1) analyze the folowing requirements
+  2) program the following business logic in a PL/SQL package
